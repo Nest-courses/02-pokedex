@@ -9,6 +9,7 @@ import { Pokemon } from './entities/pokemon.entity';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 import { InjectModel } from '@nestjs/mongoose';
+import { PaginatioDto } from 'src/common/dto/paginatio.dto';
 
 @Injectable()
 export class PokemonService {
@@ -36,8 +37,14 @@ export class PokemonService {
     }
   }
 
-  async findAll() {
-    return this.pokemonModel.find();
+  async findAll(paginatioDto: PaginatioDto) {
+    const { limit = 10, offset = 0 } = paginatioDto;
+    return this.pokemonModel
+      .find()
+      .limit(limit)
+      .skip(offset)
+      .sort({ no: 1 })
+      .select('-__v');
   }
 
   async findOne(searchEnd: string): Promise<Pokemon> {
