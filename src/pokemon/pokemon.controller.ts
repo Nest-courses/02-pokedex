@@ -9,10 +9,10 @@ import {
   Query,
 } from '@nestjs/common';
 import { ParseMongoIdPipe } from 'src/common/pipes/parse-mongo-id/parse-mongo-id.pipe';
+import { PaginatioDto } from 'src/common/dto/paginatio.dto';
 import { PokemonService } from './pokemon.service';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
-import { PaginatioDto } from 'src/common/dto/paginatio.dto';
 
 @Controller('pokemon')
 export class PokemonController {
